@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://devqgax5hg11x"]
+
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_gganc"]
+[ext_resource type="PackedScene" uid="uid://dphry0qdevko3" path="res://scenes/player.tscn" id="1_mkv81"]
+[ext_resource type="PackedScene" uid="uid://cgn4krjj6ynut" path="res://scenes/enemies/enemy_generator.tscn" id="2_5r7e1"]
+[ext_resource type="PackedScene" uid="uid://bap2mgelouf5h" path="res://scenes/space_background.tscn" id="2_nivrq"]
+[ext_resource type="Resource" uid="uid://bk7ubhbpddokt" path="res://resources/game_stats.tres" id="2_udtmu"]
+[ext_resource type="LabelSettings" uid="uid://d0hc2fw3qng25" path="res://resources/default_label_settings.tres" id="5_4oarl"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_gganc")
+game_stats = ExtResource("2_udtmu")
+
+[node name="Player" parent="." instance=ExtResource("1_mkv81")]
+position = Vector2(80, 216)
+
+[node name="EnemyGenerator" parent="." instance=ExtResource("2_5r7e1")]
+
+[node name="SpaceBackground" parent="." instance=ExtResource("2_nivrq")]
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_right = 160.0
+offset_bottom = 17.0
+text = "pontos:"
+label_settings = ExtResource("5_4oarl")
+horizontal_alignment = 1
+vertical_alignment = 1

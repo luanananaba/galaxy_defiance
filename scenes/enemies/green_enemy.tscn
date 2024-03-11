@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://2mhbokyhuhxq"]
+
+[ext_resource type="PackedScene" uid="uid://bstok8f232qxf" path="res://scenes/enemies/enemy.tscn" id="1_1hhst"]
+[ext_resource type="Texture2D" uid="uid://bdp4aurrylc7a" path="res://assets/green_enemy.png" id="2_30ki1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1gm6"]
+atlas = ExtResource("2_30ki1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mq6hj"]
+atlas = ExtResource("2_30ki1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2ttt"]
+atlas = ExtResource("2_30ki1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_73d1l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1gm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mq6hj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2ttt")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k1o7n"]
+size = Vector2(16, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1qbkf"]
+size = Vector2(12, 11)
+
+[node name="GreenEnemy" instance=ExtResource("1_1hhst")]
+
+[node name="AnimatedSprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_73d1l")
+animation = &"move"
+autoplay = "move"
+
+[node name="VisibleOnScreenNotifier" parent="." index="1"]
+visible = false
+position = Vector2(-9.53674e-07, 4.76837e-07)
+scale = Vector2(0.8, 0.7)
+
+[node name="HurtboxComponent" parent="." index="2"]
+visible = false
+
+[node name="Collision" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+shape = SubResource("RectangleShape2D_k1o7n")
+
+[node name="HitboxComponent" parent="." index="3"]
+visible = false
+
+[node name="Collision" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_1qbkf")
+
+[node name="StatsComponent" parent="Components" index="0"]
+health = 3
+
+[node name="MoveComponent" parent="Components" index="1"]
+velocity = Vector2(0, 40)

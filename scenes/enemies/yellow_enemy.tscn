@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://chykta60jncpq"]
+
+[ext_resource type="PackedScene" uid="uid://bstok8f232qxf" path="res://scenes/enemies/enemy.tscn" id="1_j1sg3"]
+[ext_resource type="Texture2D" uid="uid://45w1q0mv1lsl" path="res://assets/yellow_enemy.png" id="2_8ix1w"]
+[ext_resource type="Script" path="res://scripts/yellow_enemy.gd" id="2_matqy"]
+[ext_resource type="Script" path="res://components/scripts/border_bounce_component.gd" id="4_wivyt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgh2w"]
+atlas = ExtResource("2_8ix1w")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aowew"]
+atlas = ExtResource("2_8ix1w")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_86mje"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgh2w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aowew")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cq7ad"]
+size = Vector2(16, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85blm"]
+size = Vector2(10, 9)
+
+[node name="YellowEnemy" instance=ExtResource("1_j1sg3")]
+script = ExtResource("2_matqy")
+
+[node name="AnimatedSprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_86mje")
+autoplay = "default"
+frame = 1
+frame_progress = 0.933336
+
+[node name="VisibleOnScreenNotifier" parent="." index="1"]
+visible = false
+position = Vector2(0, -1.19209e-07)
+scale = Vector2(0.8, 0.5)
+
+[node name="HurtboxComponent" parent="." index="2"]
+visible = false
+
+[node name="Collision" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+shape = SubResource("RectangleShape2D_cq7ad")
+
+[node name="HitboxComponent" parent="." index="3"]
+visible = false
+
+[node name="Collision" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_85blm")
+debug_color = Color(0.894118, 0.278431, 0.4, 0.419608)
+
+[node name="StatsComponent" parent="Components" index="0"]
+health = 6
+
+[node name="MoveComponent" parent="Components" index="1"]
+velocity = Vector2(0, 10)
+
+[node name="ScoreComponent" parent="Components" index="7"]
+adjust_amount = 2
+
+[node name="BorderBounceComponent" type="Node" parent="Components" index="8" node_paths=PackedStringArray("actor", "move_component")]
+script = ExtResource("4_wivyt")
+actor = NodePath("../..")
+move_component = NodePath("../MoveComponent")

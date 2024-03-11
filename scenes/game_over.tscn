@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwtrf5evsaf1h"]
+
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_43v76"]
+[ext_resource type="PackedScene" uid="uid://bap2mgelouf5h" path="res://scenes/space_background.tscn" id="1_70tg6"]
+[ext_resource type="LabelSettings" uid="uid://bx37e4jr6stho" path="res://resources/title_label_settings.tres" id="1_bywjb"]
+[ext_resource type="Resource" uid="uid://bk7ubhbpddokt" path="res://resources/game_stats.tres" id="2_o58ix"]
+[ext_resource type="LabelSettings" uid="uid://d0hc2fw3qng25" path="res://resources/default_label_settings.tres" id="2_wwhgh"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_43v76")
+game_stats = ExtResource("2_o58ix")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="GameOverLabel" type="Label" parent="CenterContainer/VContainer"]
+layout_mode = 2
+text = "game over"
+label_settings = ExtResource("1_bywjb")
+horizontal_alignment = 1
+
+[node name="ScoreHContainer" type="HBoxContainer" parent="CenterContainer/VContainer"]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="CenterContainer/VContainer/ScoreHContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "pontuação:"
+label_settings = ExtResource("2_wwhgh")
+
+[node name="ScoreValue" type="Label" parent="CenterContainer/VContainer/ScoreHContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_wwhgh")
+
+[node name="HighscoreHContainer" type="HBoxContainer" parent="CenterContainer/VContainer"]
+layout_mode = 2
+
+[node name="HighscoreLabel" type="Label" parent="CenterContainer/VContainer/HighscoreHContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "maior pontuação:"
+label_settings = ExtResource("2_wwhgh")
+
+[node name="HighscoreValue" type="Label" parent="CenterContainer/VContainer/HighscoreHContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_wwhgh")
+
+[node name="Separator" type="Control" parent="CenterContainer/VContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="MenuLabel" type="Label" parent="CenterContainer/VContainer"]
+layout_mode = 2
+text = "pressione 'ESPAÇO'
+para retornar ao menu"
+label_settings = ExtResource("2_wwhgh")
+horizontal_alignment = 1
+
+[node name="SpaceBackground" parent="." instance=ExtResource("1_70tg6")]

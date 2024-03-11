@@ -1,0 +1,6 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bx37e4jr6stho"]
+
+[ext_resource type="FontFile" uid="uid://c6s2sk7hilige" path="res://fonts/kenney_mini_square.ttf" id="1_a3d6d"]
+
+[resource]
+font = ExtResource("1_a3d6d")
